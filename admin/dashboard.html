@@ -385,15 +385,25 @@
 
     <!-- ===== MESSAGES CONTACT ===== -->
     <div class="a-section" id="s-messages">
-      <h2 class="a-title">Messages reçus</h2>
-      <p class="a-desc">Messages envoyés via le formulaire de contact du portail.</p>
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.75rem;margin-bottom:0.5rem;">
+        <div>
+          <h2 class="a-title" style="margin-bottom:0.25rem;">Messages reçus</h2>
+          <p class="a-desc" style="margin:0;">Messages envoyés via le formulaire de contact du portail.</p>
+        </div>
+        <button class="btn btn-ghost" style="font-size:0.78rem;padding:0.4rem 1rem;" onclick="loadMessages()">🔄 Rafraîchir</button>
+      </div>
       <div id="messages-list"><p style="color:var(--gray);">Chargement…</p></div>
     </div>
 
     <!-- ===== DEMANDES CITOYENNETÉ ===== -->
     <div class="a-section" id="s-demandes-cit">
-      <h2 class="a-title">Demandes de Citoyenneté</h2>
-      <p class="a-desc">Dossiers de candidature soumis par les postulants. Acceptez ou refusez chaque demande.</p>
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.75rem;margin-bottom:0.5rem;">
+        <div>
+          <h2 class="a-title" style="margin-bottom:0.25rem;">Demandes de Citoyenneté</h2>
+          <p class="a-desc" style="margin:0;">Dossiers de candidature soumis par les postulants. Acceptez ou refusez chaque demande.</p>
+        </div>
+        <button class="btn btn-ghost" style="font-size:0.78rem;padding:0.4rem 1rem;" onclick="loadDemandesCit()">🔄 Rafraîchir</button>
+      </div>
       <div id="demandes-list"><p style="color:var(--gray);">Chargement…</p></div>
     </div>
 
@@ -498,14 +508,8 @@ auth.onAuthStateChanged(async user => {
 function doLogout() { auth.signOut().then(() => window.location.href = 'login.html'); }
 
 // ============================================================
-//  NAVIGATION
+//  NAVIGATION — définie une seule fois plus bas
 // ============================================================
-function showSection(name) {
-  document.querySelectorAll('.a-section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.sidebar-item').forEach(s => s.classList.remove('active'));
-  document.getElementById('s-' + name).classList.add('active');
-  document.querySelector(`[data-section="${name}"]`)?.classList.add('active');
-}
 
 // ============================================================
 //  IMAGE UPLOAD HELPERS (base64)
@@ -1136,15 +1140,16 @@ function showSpinner(show) { document.getElementById('spinner').classList.toggle
 // ============================================================
 const _sectionLoaded = {};
 
-const _origShowSection = window.showSection || function(){};
 function showSection(name) {
   document.querySelectorAll('.a-section').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.sidebar-item').forEach(s => s.classList.remove('active'));
   document.getElementById('s-' + name).classList.add('active');
   document.querySelector(`[data-section="${name}"]`)?.classList.add('active');
-  if (name === 'messages' && !_sectionLoaded.messages)    { loadMessages();   _sectionLoaded.messages = true; }
-  if (name === 'demandes-cit' && !_sectionLoaded.demCit)  { loadDemandesCit(); _sectionLoaded.demCit = true; }
-  if (name === 'citizens' && !_sectionLoaded.citizens)    { loadCitizens();   _sectionLoaded.citizens = true; }
+  // Messages et demandes : toujours recharger pour voir les nouvelles entrées
+  if (name === 'messages')     { loadMessages(); }
+  if (name === 'demandes-cit') { loadDemandesCit(); }
+  // Citoyens : chargement unique (bouton rafraîchir disponible)
+  if (name === 'citizens' && !_sectionLoaded.citizens) { loadCitizens(); _sectionLoaded.citizens = true; }
 }
 
 // ===== BADGE COUNTERS =====
@@ -1179,11 +1184,14 @@ async function loadMessages() {
   const el = document.getElementById('messages-list');
   el.innerHTML = '<p style="color:var(--gray);">Chargement…</p>';
   try {
-    const snap = await db.ref('messages/contact').orderByChild('timestamp').once('value');
+    const snap = await db.ref('messages/contact').once('value');
     const items = [];
-    snap.forEach(c => items.unshift({ key: c.key, ...c.val() }));
+    snap.forEach(c => items.push({ key: c.key, ...c.val() }));
+    // Tri côté client : plus récents en premier (timestamp desc, ou par clé Firebase desc)
+    items.sort((a, b) => (b.timestamp || b.key || 0) > (a.timestamp || a.key || 0) ? 1 : -1);
     if (items.length === 0) { el.innerHTML = '<p style="color:var(--gray);">Aucun message reçu.</p>'; return; }
-    el.innerHTML = items.map(m => `
+    const nonLus = items.filter(m => !m.lu).length;
+    el.innerHTML = `<p style="font-size:0.8rem;color:var(--text-light);margin-bottom:1rem;">${items.length} message${items.length > 1 ? 's' : ''} au total${nonLus > 0 ? ` — <strong style="color:var(--red);">${nonLus} non lu${nonLus > 1 ? 's' : ''}</strong>` : ''}</p>` + items.map(m => `
       <div class="item-card" style="border-left:4px solid ${m.lu ? 'var(--border)' : 'var(--red)'};">
         <div class="item-card-head" style="flex-wrap:wrap;gap:0.5rem;">
           <span class="item-card-title" style="display:flex;align-items:center;gap:0.5rem;">
@@ -1219,13 +1227,15 @@ async function loadDemandesCit() {
   const el = document.getElementById('demandes-list');
   el.innerHTML = '<p style="color:var(--gray);">Chargement…</p>';
   try {
-    const snap = await db.ref('messages/citoyennete').orderByChild('timestamp').once('value');
+    const snap = await db.ref('messages/citoyennete').once('value');
     const items = [];
-    snap.forEach(c => items.unshift({ key: c.key, ...c.val() }));
+    snap.forEach(c => items.push({ key: c.key, ...c.val() }));
+    items.sort((a, b) => (b.timestamp || b.key || 0) > (a.timestamp || a.key || 0) ? 1 : -1);
     if (items.length === 0) { el.innerHTML = '<p style="color:var(--gray);">Aucune demande reçue.</p>'; return; }
     // Store in cache so accepterDemande can retrieve by key safely
     items.forEach(d => { _demandeCache[d.key] = d; });
 
+    const enAttente = items.filter(d => d.statut === 'en_attente').length;
     const statutBadge = {
       en_attente: '<span style="background:#fef9c3;color:#854d0e;padding:2px 10px;font-size:0.72rem;font-weight:700;border-radius:2px;border:1px solid #fde047;">⏳ En attente</span>',
       accepte:    '<span style="background:#f0fdf4;color:#166534;padding:2px 10px;font-size:0.72rem;font-weight:700;border-radius:2px;border:1px solid #86efac;">✓ Accepté</span>',
@@ -1233,7 +1243,7 @@ async function loadDemandesCit() {
     };
     const sexeLabel = { M: 'M.', F: 'Mme', A: '' };
 
-    el.innerHTML = items.map(d => `
+    el.innerHTML = `<p style="font-size:0.8rem;color:var(--text-light);margin-bottom:1rem;">${items.length} demande${items.length > 1 ? 's' : ''} au total${enAttente > 0 ? ` — <strong style="color:#b45309;">${enAttente} en attente</strong>` : ''}</p>` + items.map(d => `
       <div class="item-card" id="dem-${d.key}" style="border-left:4px solid ${d.statut === 'en_attente' ? '#f59e0b' : d.statut === 'accepte' ? '#22c55e' : 'var(--border)'};">
         <div class="item-card-head" style="flex-wrap:wrap;gap:0.5rem;">
           <span class="item-card-title">${sexeLabel[d.sexe] || ''} ${esc(d.nom)} ${esc(d.prenom)}</span>
