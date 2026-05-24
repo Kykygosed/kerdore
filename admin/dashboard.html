@@ -20,7 +20,6 @@
   position: relative;
   color: #1a1a2e;
 }
-/* Watermark tricolore en fond */
 .id-card-kerdore::before {
   content: '';
   position: absolute; inset: 0;
@@ -33,22 +32,18 @@
     );
   pointer-events: none; z-index: 0;
 }
-/* Fine grille de sécurité */
 .id-card-kerdore::after {
   content: '';
   position: absolute; inset: 0;
-  background-image:
-    radial-gradient(circle, rgba(0,0,0,0.06) 1px, transparent 1px);
+  background-image: radial-gradient(circle, rgba(0,0,0,0.06) 1px, transparent 1px);
   background-size: 14px 14px;
   pointer-events: none; z-index: 0;
 }
-/* Bande couleur gauche (bleu Kerdoré) */
 .id-card-accent {
   width: 10px; flex-shrink: 0;
   background: linear-gradient(180deg, #0f3a8a 0%, #1a5fb4 50%, #0f3a8a 100%);
   position: relative; z-index: 1;
 }
-/* Zone photo */
 .id-card-photo-col {
   width: 115px; flex-shrink: 0;
   padding: 12px 10px 10px 10px;
@@ -76,14 +71,12 @@
   font-size: 0.52rem; color: #555; letter-spacing: 0.06em;
   text-transform: uppercase; margin-top: 4px; text-align: center;
 }
-/* Zone contenu principale */
 .id-card-body {
   flex: 1; min-width: 0;
   display: flex; flex-direction: column;
   padding: 9px 12px 8px 8px;
   position: relative; z-index: 1;
 }
-/* En-tête */
 .id-card-header {
   display: flex; align-items: flex-start; justify-content: space-between;
   margin-bottom: 7px;
@@ -108,14 +101,12 @@
 .id-card-card-type-en {
   font-size: 0.42rem; letter-spacing: 0.06em; color: #888; font-style: italic;
 }
-/* Flag EU-style badge */
 .id-card-flag-badge {
   width: 26px; height: 26px; border-radius: 50%;
   background: #003399; display: flex; align-items: center; justify-content: center;
   font-size: 0.55rem; font-weight: 900; color: #f5c900; letter-spacing: 0.02em;
   border: 1.5px solid #f5c900; flex-shrink: 0;
 }
-/* Champs */
 .id-card-fields-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -139,7 +130,6 @@
   line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .id-field-val.small { font-size: 0.65rem; }
-/* Bas de carte — N° document + expiration */
 .id-card-bottom {
   display: flex; align-items: flex-end; justify-content: space-between;
   margin-top: 6px; padding-top: 5px;
@@ -163,7 +153,6 @@
 .id-card-expiry-val {
   font-size: 0.78rem; font-weight: 700; font-family: 'Courier New', monospace;
 }
-/* MRZ (bas de carte) */
 .id-card-mrz-strip {
   background: rgba(255,255,255,0.6);
   border-top: 1px solid rgba(0,0,0,0.08);
@@ -174,7 +163,6 @@
   position: absolute; bottom: 0; left: 10px; right: 0;
   z-index: 2;
 }
-/* Statut inactif overlay */
 .id-card-inactive-overlay {
   position: absolute; inset: 0; z-index: 10;
   background: repeating-linear-gradient(
@@ -259,7 +247,6 @@
     <div class="a-section" id="s-stats">
       <h2 class="a-title">Statistiques nationales</h2>
       <p class="a-desc">Ces chiffres s'affichent sur la page d'accueil du portail.</p>
-
       <div class="form-group" style="max-width:420px;">
         <label class="form-label">Population (habitants)</label>
         <div style="display:flex;gap:0.75rem;align-items:center;">
@@ -268,19 +255,16 @@
         </div>
         <p style="font-size:0.75rem;color:var(--gray);margin-top:0.4rem;">Cliquez « +1 habitant » pour enregistrer immédiatement l'ajout d'un nouveau citoyen.</p>
       </div>
-
       <div class="form-group" style="max-width:420px;">
         <label class="form-label">PIB</label>
         <input class="form-input" id="st-pib" type="text" placeholder="ex: 4 200 € / 12 000 $"/>
         <p style="font-size:0.75rem;color:var(--gray);margin-top:0.4rem;">Saisissez la valeur avec l'unité (€, $, etc.).</p>
       </div>
-
       <div class="form-group" style="max-width:420px;">
         <label class="form-label">Superficie</label>
         <input class="form-input" id="st-superficie" type="text" placeholder="ex: 12 km²"/>
         <p style="font-size:0.75rem;color:var(--gray);margin-top:0.4rem;">Indiquez l'unité (km², m², etc.).</p>
       </div>
-
       <button class="btn btn-gold" onclick="saveSection('stats')">Enregistrer les statistiques</button>
     </div>
 
@@ -288,15 +272,12 @@
     <div class="a-section" id="s-gouvernement">
       <h2 class="a-title">Gouvernement</h2>
       <p class="a-desc">Chef de l'État et Conseil des Ministres — vous pouvez ajouter des photos (image → base64).</p>
-
       <h3 style="font-size:0.82rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem;color:var(--blue);">Chef de l'État</h3>
       <div class="form-grid-2">
         <div class="form-group"><label class="form-label">Titre</label><input class="form-input" id="g-chef_titre" type="text" placeholder="ex: Prince de Kerdoré"/></div>
         <div class="form-group"><label class="form-label">Nom</label><input class="form-input" id="g-chef_nom" type="text"/></div>
       </div>
       <div class="form-group"><label class="form-label">Biographie officielle</label><textarea class="form-textarea" id="g-chef_bio"></textarea></div>
-
-      <!-- Photo chef d'état -->
       <div class="form-group">
         <label class="form-label">Photo du Chef de l'État</label>
         <div class="img-upload-area" id="chef-upload-area" onclick="document.getElementById('chef-photo-input').click()">
@@ -308,14 +289,11 @@
         <input type="file" id="chef-photo-input" accept="image/*" style="display:none" onchange="handleImageUpload('chef-photo-input','chef-photo-preview','g-chef_photo','chef-upload-area')"/>
         <button type="button" class="img-clear-btn" style="margin-top:0.4rem;" onclick="clearImage('chef-photo-preview','g-chef_photo','chef-upload-area')">✕ Supprimer la photo</button>
       </div>
-
       <div class="form-group"><label class="form-label">Description du Conseil National</label><textarea class="form-textarea" id="g-parlement" style="min-height:80px;"></textarea></div>
-
       <h3 style="font-size:0.82rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin:2rem 0 1rem;color:var(--blue);">Conseil des Ministres</h3>
       <div id="ministres-container"></div>
       <button class="btn-add" onclick="addMinistre()">+ Ajouter un ministre</button>
       <br><br>
-
       <div style="border-top:2px solid var(--border);margin:2rem 0 1.5rem;"></div>
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
         <h3 style="font-size:0.82rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--blue);margin:0;">Groupes personnalisés</h3>
@@ -323,7 +301,6 @@
       </div>
       <p style="font-size:0.8rem;color:var(--text-light);margin-bottom:1.2rem;">Créez librement des catégories (ex: Conseil de Sécurité, Haut Commandement…) avec leurs membres.</p>
       <div id="groupes-container"></div>
-
       <button class="btn btn-gold" onclick="saveSection('gouvernement')">Enregistrer le gouvernement</button>
     </div>
 
@@ -465,51 +442,36 @@
 <script>
 
 // ============================================================
-//  AUTH GUARD — Admins uniquement (users/{uid}/admin === true)
+//  AUTH GUARD
 // ============================================================
 auth.onAuthStateChanged(async user => {
   if (!user) { window.location.href = 'login.html'; return; }
-
   try {
     const userRef = db.ref('users/' + user.uid);
     const snap = await userRef.once('value');
-
     if (!snap.exists()) {
-      // Utilisateur pas encore dans la base → on le crée (sans droits admin)
-      await userRef.set({
-        email:     user.email,
-        createdAt: new Date().toISOString(),
-        admin:     false
-      });
+      await userRef.set({ email: user.email, createdAt: new Date().toISOString(), admin: false });
       await auth.signOut();
       window.location.href = 'login.html?error=unauthorized';
       return;
     }
-
     const data = snap.val();
     if (data.admin !== true) {
-      // Existe mais pas admin
       await auth.signOut();
       window.location.href = 'login.html?error=unauthorized';
       return;
     }
-
   } catch (e) {
     console.error('[Kerdoré] Impossible de vérifier les droits admin :', e);
     await auth.signOut();
     window.location.href = 'login.html?error=unauthorized';
     return;
   }
-
-  document.getElementById('user-email').textContent  = user.email;
+  document.getElementById('user-email').textContent   = user.email;
   document.getElementById('account-email').textContent = user.email;
   loadAllSections();
 });
 function doLogout() { auth.signOut().then(() => window.location.href = 'login.html'); }
-
-// ============================================================
-//  NAVIGATION — définie une seule fois plus bas
-// ============================================================
 
 // ============================================================
 //  IMAGE UPLOAD HELPERS (base64)
@@ -525,10 +487,9 @@ function handleImageUpload(inputId, previewId, hiddenId, areaId) {
   const reader = new FileReader();
   reader.onload = e => {
     const b64 = e.target.result;
-    document.getElementById(hiddenId).value  = b64;
+    document.getElementById(hiddenId).value = b64;
     const prev = document.getElementById(previewId);
-    prev.src   = b64;
-    prev.style.display = 'block';
+    prev.src = b64; prev.style.display = 'block';
     const area = document.getElementById(areaId);
     if (area) area.style.borderColor = 'var(--blue)';
   };
@@ -571,7 +532,6 @@ function fillHome(d) {
 function fillGouvernement(d) {
   setVal('g-chef_titre', d.chef_titre); setVal('g-chef_nom', d.chef_nom);
   setVal('g-chef_bio', d.chef_bio); setVal('g-parlement', d.parlement);
-  // Photo chef
   if (d.chef_photo) {
     document.getElementById('g-chef_photo').value = d.chef_photo;
     const prev = document.getElementById('chef-photo-preview');
@@ -580,7 +540,6 @@ function fillGouvernement(d) {
   const container = document.getElementById('ministres-container');
   container.innerHTML = '';
   (d.ministres || []).forEach(m => addMinistre(m));
-  // Groupes personnalisés
   const gc = document.getElementById('groupes-container');
   gc.innerHTML = '';
   (d.groupes || []).forEach(g => addGroupe(g));
@@ -660,7 +619,6 @@ async function saveSection(section) {
 // ============================================================
 //  DYNAMIC ITEM BUILDERS
 // ============================================================
-// +1 habitant — incrémente directement dans Firebase et met à jour le champ
 async function addOneHabitant() {
   try {
     const snap = await db.ref('content/stats/habitants').once('value');
@@ -733,14 +691,12 @@ async function loadVotes() {
 async function renderAdminElection(type) {
   const container = document.getElementById('admin-election-' + type);
   const meta = VOTE_ELECTIONS[type];
-
   const [configSnap, candidatsSnap, v1Snap, v2Snap] = await Promise.all([
     db.ref(`elections/${type}/config`).once('value'),
     db.ref(`elections/${type}/candidats`).once('value'),
     db.ref(`elections/${type}/votes_t1`).once('value'),
     db.ref(`elections/${type}/votes_t2`).once('value')
   ]);
-
   const config    = configSnap.val()    || { status: 'idle', titre: meta.label };
   const candidats = candidatsSnap.val() || {};
   const votes_t1  = v1Snap.val()        || {};
@@ -748,7 +704,6 @@ async function renderAdminElection(type) {
   const status    = config.status || 'idle';
   const smeta     = VOTE_STATUS_META[status];
 
-  // Count votes per candidate
   function countVotes(votesObj) {
     const counts = {};
     Object.values(votesObj).forEach(id => { counts[id] = (counts[id] || 0) + 1; });
@@ -758,7 +713,6 @@ async function renderAdminElection(type) {
   const counts2 = countVotes(votes_t2);
   const totalV1 = Object.keys(votes_t1).length;
   const totalV2 = Object.keys(votes_t2).length;
-
   const candidatsList = Object.entries(candidats);
 
   let html = `
@@ -767,8 +721,6 @@ async function renderAdminElection(type) {
       <span class="item-card-title">${meta.icon} ${meta.label}</span>
       <span style="font-size:0.72rem;font-weight:700;padding:0.2rem 0.6rem;background:var(--blue-light);color:var(--blue);border-radius:2px;">${smeta.label}</span>
     </div>
-
-    <!-- Config titre & description -->
     <div class="form-grid-2">
       <div class="form-group">
         <label class="form-label">Titre de l'élection</label>
@@ -781,39 +733,32 @@ async function renderAdminElection(type) {
     </div>
     <button class="btn btn-ghost" style="font-size:0.78rem;padding:0.3rem 0.8rem;margin-bottom:1rem;"
       onclick="saveElectionConfig('${type}')">Enregistrer le titre</button>
-
-    <!-- Actions de statut -->
     <div style="display:flex;flex-wrap:wrap;gap:0.6rem;margin-bottom:1.2rem;">`;
 
   if (smeta.nextLabel) {
     html += `<button class="btn btn-blue" style="font-size:0.8rem;"
       onclick="setElectionStatus('${type}','${smeta.next}')">${smeta.nextLabel}</button>`;
   }
-
   if (status === 'selection_t2') {
     html += `<button class="btn btn-blue" style="font-size:0.8rem;"
       onclick="launchTour2('${type}')">🚀 Lancer le Tour 2 avec les candidats sélectionnés</button>`;
   }
-
   if (status !== 'idle') {
     html += `<button class="btn btn-red" style="font-size:0.8rem;"
       onclick="resetElection('${type}')">⚠ Réinitialiser l'élection</button>`;
   }
   html += `</div>`;
 
-  // Candidates list with votes
   if (candidatsList.length > 0) {
     html += `<p style="font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-light);margin-bottom:0.7rem;">
       Candidats (${candidatsList.length}) ${totalV1 > 0 ? `— ${totalV1} vote(s) Tour 1` : ''} ${totalV2 > 0 ? `— ${totalV2} vote(s) Tour 2` : ''}
     </p>`;
-
     candidatsList.forEach(([id, c]) => {
       const v1 = counts1[id] || 0;
       const v2 = counts2[id] || 0;
       const pct1 = totalV1 > 0 ? Math.round(v1/totalV1*100) : 0;
       const pct2 = totalV2 > 0 ? Math.round(v2/totalV2*100) : 0;
       const isFinalist = c.selected_t2 ? true : false;
-
       html += `<div style="display:flex;align-items:center;gap:0.8rem;padding:0.65rem 0.9rem;
         border:1px solid var(--border);margin-bottom:0.5rem;background:${isFinalist?'var(--blue-light)':'var(--white)'};">
         <div style="width:38px;height:38px;border-radius:3px;flex-shrink:0;background:var(--blue-light);
@@ -840,7 +785,6 @@ async function renderAdminElection(type) {
   } else {
     html += `<p style="font-size:0.85rem;color:var(--text-light);">Aucun candidat inscrit.</p>`;
   }
-
   html += `</div>`;
   container.innerHTML = html;
 }
@@ -865,7 +809,6 @@ async function toggleCitizenStatus(citizenId, newStatus) {
   if (!confirm(`Voulez-vous ${label} la carte de ce citoyen ?`)) return;
   try {
     await db.ref(`citizens/${citizenId}/statut`).set(newStatus);
-    // Update local cache
     const idx = _allCitizens.findIndex(c => c.key === citizenId);
     if (idx !== -1) _allCitizens[idx].statut = newStatus;
     filterCitizens();
@@ -894,10 +837,7 @@ async function clearRenewalRequest(citizenId) {
   } catch(e) { showAlert('Erreur : ' + e.message, 'error'); }
 }
 
-
-
 async function launchTour2(type) {
-  // Verify at least one finalist is selected
   const snap = await db.ref(`elections/${type}/candidats`).once('value');
   const candidats = snap.val() || {};
   const finalists = Object.entries(candidats).filter(([,c]) => c.selected_t2);
@@ -939,7 +879,6 @@ function addGroupe(data = {}) {
       <button class="btn-add" onclick="addMembreGroupe('${membresId}')" style="margin-top:0.5rem;">+ Ajouter un membre</button>
     </div>`;
   gc.appendChild(groupDiv);
-  // Charger les membres existants
   (data.membres || []).forEach(m => addMembreGroupe(membresId, m));
 }
 
@@ -1072,7 +1011,7 @@ function addArticle2(data = {}) {
     <div class="form-group"><label class="form-label">Auteur / Source</label><input class="form-input" data-key="auteur" value="${esc(data.auteur)}" placeholder="Chancellerie d'État"/></div>
     <div class="form-group"><label class="form-label">Contenu de l'article</label><textarea class="form-textarea" data-key="contenu" style="min-height:130px;">${esc(data.contenu)}</textarea></div>
     <div class="form-group">
-      <label class="form-label">Image de bannière <span style="color:var(--text-light);font-weight:400;text-transform:none;">(optionnel — affichée en haut de l'article)</span></label>
+      <label class="form-label">Image de bannière <span style="color:var(--text-light);font-weight:400;text-transform:none;">(optionnel)</span></label>
       <div class="img-upload-area" id="${areaId}" onclick="document.getElementById('${inputId}').click()">
         <span class="img-upload-btn">🖼️ Choisir une bannière</span>
         <span class="img-upload-label">JPG, PNG, WebP — max 5 Mo — format paysage recommandé</span>
@@ -1136,7 +1075,7 @@ function showAlert(msg, type) {
 function showSpinner(show) { document.getElementById('spinner').classList.toggle('show', show); }
 
 // ============================================================
-//  MESSAGES — load on section show
+//  NAVIGATION
 // ============================================================
 const _sectionLoaded = {};
 
@@ -1145,14 +1084,14 @@ function showSection(name) {
   document.querySelectorAll('.sidebar-item').forEach(s => s.classList.remove('active'));
   document.getElementById('s-' + name).classList.add('active');
   document.querySelector(`[data-section="${name}"]`)?.classList.add('active');
-  // Messages et demandes : toujours recharger pour voir les nouvelles entrées
   if (name === 'messages')     { loadMessages(); }
   if (name === 'demandes-cit') { loadDemandesCit(); }
-  // Citoyens : chargement unique (bouton rafraîchir disponible)
   if (name === 'citizens' && !_sectionLoaded.citizens) { loadCitizens(); _sectionLoaded.citizens = true; }
 }
 
-// ===== BADGE COUNTERS =====
+// ============================================================
+//  BADGE COUNTERS
+// ============================================================
 async function loadBadgeCounts() {
   try {
     const [msgSnap, citSnap] = await Promise.all([
@@ -1169,7 +1108,9 @@ async function loadBadgeCounts() {
 }
 loadBadgeCounts();
 
-// ===== DEST LABEL MAP =====
+// ============================================================
+//  DEST LABEL MAP
+// ============================================================
 const destLabels = {
   chef_supreme: '👑 Chef Suprême',
   gouvernement: '🏛️ Gouvernement',
@@ -1179,17 +1120,27 @@ const destLabels = {
   interieur:    '🔐 Intérieur'
 };
 
-// ===== LOAD CONTACT MESSAGES =====
+// ============================================================
+//  LOAD CONTACT MESSAGES
+// ============================================================
 async function loadMessages() {
   const el = document.getElementById('messages-list');
   el.innerHTML = '<p style="color:var(--gray);">Chargement…</p>';
   try {
     const snap = await db.ref('messages/contact').once('value');
-    const items = [];
-    snap.forEach(c => items.push({ key: c.key, ...c.val() }));
-    // Tri côté client : plus récents en premier (timestamp desc, ou par clé Firebase desc)
-    items.sort((a, b) => (b.timestamp || b.key || 0) > (a.timestamp || a.key || 0) ? 1 : -1);
-    if (items.length === 0) { el.innerHTML = '<p style="color:var(--gray);">Aucun message reçu.</p>'; return; }
+    const val = snap.val();
+    if (!val) { el.innerHTML = '<p style="color:var(--gray);">Aucun message reçu.</p>'; return; }
+
+    // ---- FIX : Object.entries au lieu de snap.forEach ----
+    const items = Object.entries(val).map(([key, data]) => ({ key, ...data }));
+    items.sort((a, b) => {
+      const ka = a.timestamp || a.key || '';
+      const kb = b.timestamp || b.key || '';
+      if (kb > ka) return 1;
+      if (kb < ka) return -1;
+      return 0;
+    });
+
     const nonLus = items.filter(m => !m.lu).length;
     el.innerHTML = `<p style="font-size:0.8rem;color:var(--text-light);margin-bottom:1rem;">${items.length} message${items.length > 1 ? 's' : ''} au total${nonLus > 0 ? ` — <strong style="color:var(--red);">${nonLus} non lu${nonLus > 1 ? 's' : ''}</strong>` : ''}</p>` + items.map(m => `
       <div class="item-card" style="border-left:4px solid ${m.lu ? 'var(--border)' : 'var(--red)'};">
@@ -1220,20 +1171,26 @@ async function markMsgRead(key, btn) {
   loadBadgeCounts();
 }
 
-// ===== LOAD CITIZENSHIP REQUESTS =====
-const _demandeCache = {}; // key -> demande object
-
+// ============================================================
+//  LOAD CITIZENSHIP REQUESTS
+// ============================================================
 async function loadDemandesCit() {
   const el = document.getElementById('demandes-list');
   el.innerHTML = '<p style="color:var(--gray);">Chargement…</p>';
   try {
     const snap = await db.ref('messages/citoyennete').once('value');
-    const items = [];
-    snap.forEach(c => items.push({ key: c.key, ...c.val() }));
-    items.sort((a, b) => (b.timestamp || b.key || 0) > (a.timestamp || a.key || 0) ? 1 : -1);
-    if (items.length === 0) { el.innerHTML = '<p style="color:var(--gray);">Aucune demande reçue.</p>'; return; }
-    // Store in cache so accepterDemande can retrieve by key safely
-    items.forEach(d => { _demandeCache[d.key] = d; });
+    const val = snap.val();
+    if (!val) { el.innerHTML = '<p style="color:var(--gray);">Aucune demande reçue.</p>'; return; }
+
+    // ---- FIX : Object.entries au lieu de snap.forEach ----
+    const items = Object.entries(val).map(([key, data]) => ({ key, ...data }));
+    items.sort((a, b) => {
+      const ka = a.timestamp || a.key || '';
+      const kb = b.timestamp || b.key || '';
+      if (kb > ka) return 1;
+      if (kb < ka) return -1;
+      return 0;
+    });
 
     const enAttente = items.filter(d => d.statut === 'en_attente').length;
     const statutBadge = {
@@ -1242,6 +1199,9 @@ async function loadDemandesCit() {
       refuse:     '<span style="background:#fef2f2;color:#7f1d1d;padding:2px 10px;font-size:0.72rem;font-weight:700;border-radius:2px;border:1px solid #fca5a5;">✗ Refusé</span>'
     };
     const sexeLabel = { M: 'M.', F: 'Mme', A: '' };
+
+    // Stocker pour que accepterDemande/refuserDemande puissent retrouver les données
+    items.forEach(d => { _demandeCache[d.key] = d; });
 
     el.innerHTML = `<p style="font-size:0.8rem;color:var(--text-light);margin-bottom:1rem;">${items.length} demande${items.length > 1 ? 's' : ''} au total${enAttente > 0 ? ` — <strong style="color:#b45309;">${enAttente} en attente</strong>` : ''}</p>` + items.map(d => `
       <div class="item-card" id="dem-${d.key}" style="border-left:4px solid ${d.statut === 'en_attente' ? '#f59e0b' : d.statut === 'accepte' ? '#22c55e' : 'var(--border)'};">
@@ -1277,23 +1237,23 @@ async function loadDemandesCit() {
   } catch(e) { el.innerHTML = '<p style="color:var(--red);">Erreur de chargement.</p>'; }
 }
 
+// Cache pour accepterDemande
+const _demandeCache = {};
+
 async function accepterDemande(key) {
   const data = _demandeCache[key];
   if (!data) { showAlert('Erreur : données introuvables, rechargez la page.', 'error'); return; }
   if (!confirm(`Accepter la demande de ${data.prenom} ${data.nom} ? Un dossier de citoyenneté sera créé.`)) return;
   try {
-    // Generate unique 6-digit ID starting from 145670
     const snap = await db.ref('citizens').once('value');
     const existingCount = snap.numChildren();
     let newIdNum = 145670 + existingCount + 1;
-    // Ensure no collision with existing keys
     if (snap.exists()) {
       const existingIds = Object.keys(snap.val()).map(Number).filter(n => !isNaN(n));
       const maxId = existingIds.length > 0 ? Math.max(...existingIds) : 145670;
       newIdNum = Math.max(newIdNum, maxId + 1);
     }
     const citizenId = String(newIdNum);
-
     const sexeLabel = { M: 'M.', F: 'Mme', A: '' };
     const prefix = sexeLabel[data.sexe] || '';
 
@@ -1311,21 +1271,19 @@ async function accepterDemande(key) {
         return d.toISOString().split('T')[0];
       })(),
       identifiant: citizenId,
-      uid:       data.uid || null,
-      photo:     data.photo || null,
-      statut:    'actif'
+      uid:    data.uid || null,
+      photo:  data.photo || null,
+      statut: 'actif'
     };
 
     await Promise.all([
       db.ref(`citizens/${citizenId}`).set(citizenData),
       db.ref(`messages/citoyennete/${key}/statut`).set('accepte'),
       db.ref(`messages/citoyennete/${key}/lu`).set(true),
-      // Increment citizen count
       db.ref('content/stats/habitants').transaction(n => (n || 0) + 1)
     ]);
 
     showAlert(`✓ ${prefix} ${data.nom} ${data.prenom} est maintenant citoyen(ne) de Kerdoré — ID #${citizenId}`, 'success');
-    _sectionLoaded.demCit = false;
     _sectionLoaded.citizens = false;
     loadDemandesCit();
     loadBadgeCounts();
@@ -1338,12 +1296,13 @@ async function refuserDemande(key) {
   if (!confirm('Refuser cette demande de citoyenneté ?')) return;
   await db.ref(`messages/citoyennete/${key}/statut`).set('refuse');
   await db.ref(`messages/citoyennete/${key}/lu`).set(true);
-  _sectionLoaded.demCit = false;
   loadDemandesCit();
   loadBadgeCounts();
 }
 
-// ===== LOAD CITIZENS =====
+// ============================================================
+//  LOAD CITIZENS
+// ============================================================
 let _allCitizens = [];
 
 async function loadCitizens() {
@@ -1358,10 +1317,10 @@ async function loadCitizens() {
 }
 
 function filterCitizens() {
-  const el       = document.getElementById('citizens-list');
-  const countEl  = document.getElementById('citizens-count');
-  const query    = (document.getElementById('citizen-search')?.value || '').toLowerCase().trim();
-  const statusF  = document.getElementById('citizen-filter-status')?.value || '';
+  const el      = document.getElementById('citizens-list');
+  const countEl = document.getElementById('citizens-count');
+  const query   = (document.getElementById('citizen-search')?.value || '').toLowerCase().trim();
+  const statusF = document.getElementById('citizen-filter-status')?.value || '';
 
   if (_allCitizens.length === 0) {
     countEl.textContent = '';
@@ -1399,7 +1358,6 @@ function buildIdCard(c) {
     ? `<img src="${c.photo}" alt="Photo"/>`
     : `<div class="id-card-photo-silhouette"><svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg"><ellipse cx="40" cy="28" rx="16" ry="18" fill="#8aadcc"/><ellipse cx="40" cy="75" rx="28" ry="22" fill="#8aadcc"/></svg></div>`;
 
-  // Expiration logic
   const today = new Date(); today.setHours(0,0,0,0);
   const expDate = c.expiration ? new Date(c.expiration) : null;
   const daysLeft = expDate ? Math.ceil((expDate - today) / (1000*60*60*24)) : null;
@@ -1409,17 +1367,15 @@ function buildIdCard(c) {
 
   const isActif = (c.statut || 'actif') === 'actif';
 
-  // Badges
   let badges = `<span class="${isActif ? 'badge-actif' : 'badge-inactif'}">${isActif ? '● Actif' : '● Inactif'}</span>`;
   if (c.renewalRequested) badges += `<span class="badge-renewal">📬 Renouvellement demandé</span>`;
-  else if (daysLeft !== null && daysLeft < 0)     badges += `<span class="badge-expired">⚠ Carte expirée</span>`;
-  else if (daysLeft !== null && daysLeft <= 30)   badges += `<span class="badge-expiring">⚠ Expire dans ${daysLeft}j</span>`;
+  else if (daysLeft !== null && daysLeft < 0)   badges += `<span class="badge-expired">⚠ Carte expirée</span>`;
+  else if (daysLeft !== null && daysLeft <= 30) badges += `<span class="badge-expiring">⚠ Expire dans ${daysLeft}j</span>`;
 
   const expiryDisplay = expDate ? expDate.toLocaleDateString('fr-FR') : '—';
   const naissDisplay  = c.naissance ? new Date(c.naissance).toLocaleDateString('fr-FR') : '—';
   const sexeDisplay   = c.sexe === 'M' ? 'M / Male' : c.sexe === 'F' ? 'F / Female' : 'A';
 
-  // MRZ lines
   const mrzNom    = (c.nom||'').toUpperCase().replace(/ /g,'<').padEnd(13,'<');
   const mrzPrenom = (c.prenom||'').toUpperCase().replace(/ /g,'<').padEnd(10,'<');
   const mrzId     = (c.identifiant||'000000').padEnd(9,'<');
@@ -1433,21 +1389,13 @@ function buildIdCard(c) {
     </h3>
     <div class="id-card-kerdore" style="position:relative;">
       ${!isActif ? '<div class="id-card-inactive-overlay"></div>' : ''}
-
-      <!-- Bande accent gauche -->
       <div class="id-card-accent"></div>
-
-      <!-- Photo -->
       <div class="id-card-photo-col">
         <div class="id-card-photo">${photoHTML}</div>
         <div class="id-card-sig-label">Signature</div>
         <div style="width:75px;height:18px;border-bottom:1px solid #aaa;margin-top:2px;"></div>
       </div>
-
-      <!-- Corps principal -->
       <div class="id-card-body">
-
-        <!-- En-tête -->
         <div class="id-card-header">
           <div class="id-card-header-left">
             <div class="id-card-emblem">
@@ -1461,8 +1409,6 @@ function buildIdCard(c) {
           </div>
           <div class="id-card-flag-badge">KDR</div>
         </div>
-
-        <!-- Champs -->
         <div class="id-card-fields-grid">
           <div class="id-card-field full">
             <div class="id-field-label">NOM / <span class="id-field-label-en">Surname</span></div>
@@ -1493,8 +1439,6 @@ function buildIdCard(c) {
             <div class="id-field-val small" style="font-size:0.62rem;white-space:normal;">${esc(c.adresse)}</div>
           </div>` : ''}
         </div>
-
-        <!-- Bas : N° document + expiry -->
         <div class="id-card-bottom">
           <div class="id-card-docnum">
             <div class="id-card-docnum-label">N° DU DOCUMENT / <span style="font-style:italic;font-weight:400;color:#888;font-size:0.4rem;">Document No.</span></div>
@@ -1505,16 +1449,12 @@ function buildIdCard(c) {
             <div class="id-card-expiry-val" style="color:${expiryColor};">${expiryDisplay}</div>
           </div>
         </div>
-
-        <!-- MRZ -->
         <div class="id-card-mrz-strip">
           KDR&lt;&lt;${mrzNom}&lt;${mrzPrenom}&lt;&lt;&lt;&lt;&lt;<br/>
           ${mrzId}KDR${mrzDate}&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
         </div>
       </div>
     </div>
-
-    <!-- Actions admin -->
     <div class="citizen-card-actions">
       <button class="btn btn-ghost" style="font-size:0.75rem;padding:0.3rem 0.8rem;"
         onclick="toggleCitizenStatus('${c.key}', '${isActif ? 'inactif' : 'actif'}')">
@@ -1530,7 +1470,6 @@ function buildIdCard(c) {
         onclick="clearRenewalRequest('${c.key}')">
         ✕ Annuler demande renouvellement
       </button>` : ''}
-
     </div>
   </div>`;
 }
